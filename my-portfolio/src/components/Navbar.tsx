@@ -13,6 +13,9 @@ export default function Navbar() {
         <Link href="/about" className="hover:text-zinc-900 dark:hover:text-zinc-100">
           About
         </Link>
+        <Link href="/projects" className="hover:text-zinc-900 dark:hover:text-zinc-100">
+          Projects
+        </Link>
       </nav>
     </header>
   );
