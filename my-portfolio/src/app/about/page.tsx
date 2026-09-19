@@ -1,4 +1,10 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'About Me | Charles Patrick',
+  description: 'Learn more about Charles Patrick, a Frontend & Full-Stack Developer specializing in building clean, modern web applications.'
+};
 
 export default function AboutPage() {
   return (

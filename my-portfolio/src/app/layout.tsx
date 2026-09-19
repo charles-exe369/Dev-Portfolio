@@ -1,5 +1,20 @@
+import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import './globals.css';
+
+//Global metadata setup
+export const metadata: Metadata = {
+  title: {
+    default: 'Charles Patrick - Frontend & Full-Stack Developer',
+    template: '%s | Charles Patrick',
+  },
+  description: 'Portfolio of Charles Patrick, a Frontend & Full-Stack Developer specializing in building clean, modern web applications.',
+  openGraph: {
+    title: 'Charles Patrick - Frontend & Full-Stack Developer',
+    description: 'Portfolio of Charles Patrick, a Frontend & Full-Stack Developer specializing in building clean, modern web applications.',
+    type: 'website',
+  }
+}
 
 export default function RootLayout({
   children,
