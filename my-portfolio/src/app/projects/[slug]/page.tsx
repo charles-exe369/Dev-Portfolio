@@ -1,4 +1,5 @@
-import { getProjectBySlug } from '@/lib/projects';
+import type { Metadata } from 'next';
+import { getProjectBySlug, getAllProjects } from '@/lib/projects';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 
@@ -6,13 +7,29 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export default async function ProjectDetailPage({ params }: PageProps) {
+export async function generateStaticParams() {
+  const projects = getAllProjects();
+  return projects.map((project) => ({
+    slug: project.slug,
+  }));
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  
-  // Fetch project markdown data by slug
   const project = await getProjectBySlug(slug);
 
-  // If no matching .md file was found in content/projects/, return a 404 page
+  if (!project) return { title: 'Project Not Found' };
+
+  return {
+    title: project.title,
+    description: project.description,
+  };
+}
+
+export default async function ProjectDetailPage({ params }: PageProps) {
+  const { slug } = await params;
+  const project = await getProjectBySlug(slug);
+
   if (!project) {
     notFound();
   }
@@ -30,13 +47,13 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         {project.title}
       </h1>
       
-      <p className="text-sm text-zinc-500 mt-1">
+      <p className="text-sm text-zinc-500 mt-1 mb-8">
         Published on {project.date}
       </p>
 
-      {/* Render converted Markdown HTML string securely */}
+      {/* Tailwind Typography styling container */}
       <article
-        className="mt-8 prose dark:prose-invert max-w-none space-y-4 text-zinc-700 dark:text-zinc-300 leading-relaxed"
+        className="prose dark:prose-invert max-w-none prose-headings:font-semibold prose-a:text-blue-600 prose-img:rounded-xl"
         dangerouslySetInnerHTML={{ __html: project.contentHtml || '' }}
       />
     </main>
