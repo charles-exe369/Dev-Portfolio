@@ -1,10 +1,7 @@
 @import "tailwindcss";
-@plugin "@tailwindcss/typography";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Add this variant line so Tailwind v4 uses .dark class on <html> */
+@variant dark (&:where(.dark, .dark *));
 
 @theme inline {
   --color-background: var(--background);
