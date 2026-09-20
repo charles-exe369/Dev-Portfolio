@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import './globals.css';
+import { ThemeProvider } from '@/components/ThemeProvider';
 
 //Global metadata setup
 export const metadata: Metadata = {
@@ -22,10 +23,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen">
-        <Navbar />
-        {children}
+    // suppressHydrationWarning prevents warnings when next-themes modifies the <html> class
+    <html lang="en" suppressHydrationWarning>
+      <body className="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen transition-colors duration-200">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Navbar />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
