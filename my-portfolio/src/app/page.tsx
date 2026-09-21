@@ -1,11 +1,29 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { getAllProjects } from '@/lib/projects';
+import { supabase } from '@/lib/supabase';
 import FadeIn from '@/components/FadeIn';
-import { ArrowUpRight, Code2, Database, Wrench, Sparkles, Terminal } from 'lucide-react';
+import { ArrowUpRight, Code2, Database, Wrench, Sparkles, Terminal, ExternalLink, GitBranch } from 'lucide-react';
 
-export default function HomePage() {
-  const projects = getAllProjects().slice(0, 3);
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  image_url: string;
+  tags: string[];
+  github_url?: string;
+  live_url?: string;
+  created_at: string;
+}
+
+export default async function HomePage() {
+  // Fetch top 3 latest projects directly from Supabase
+  const { data: projects } = await supabase
+    .from('projects')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .limit(3);
+
+  const featuredProjects: Project[] = projects || [];
 
   return (
     <main className="max-w-2xl mx-auto px-4 py-12 space-y-16">
@@ -103,7 +121,7 @@ export default function HomePage() {
                 <span className="font-semibold text-xs tracking-wider uppercase">Backend</span>
               </div>
               <div className="flex flex-wrap gap-1.5">
-                {['Server Actions', 'Node.js', 'PHP', 'MySQL'].map((item) => (
+                {['Server Actions', 'Node.js', 'PHP', 'MySQL', 'Supabase'].map((item) => (
                   <span key={item} className="text-xs px-2.5 py-1 rounded-md bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700/60 font-medium text-zinc-700 dark:text-zinc-300">
                     {item}
                   </span>
@@ -128,7 +146,7 @@ export default function HomePage() {
         </section>
       </FadeIn>
 
-      {/* FEATURED PROJECTS */}
+      {/* FEATURED PROJECTS (SUPABASE DRIVEN) */}
       <FadeIn delay={0.3} direction="up">
         <section className="space-y-6 pt-6 border-t border-zinc-200 dark:border-zinc-800/80">
           <div className="flex justify-between items-center">
@@ -143,28 +161,41 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="grid gap-4">
-            {projects.map((project) => (
+          <div className="grid gap-6">
+            {featuredProjects.map((project) => (
               <div
-                key={project.slug}
-                className="group p-5 rounded-2xl bg-zinc-50/60 dark:bg-zinc-900/60 hover:bg-zinc-100/80 dark:hover:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all space-y-3 shadow-sm hover:shadow-md"
+                key={project.id}
+                className="group overflow-hidden rounded-2xl bg-zinc-50/60 dark:bg-zinc-900/60 hover:bg-zinc-100/80 dark:hover:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all space-y-4 p-5 shadow-sm hover:shadow-md"
               >
-                <div className="flex justify-between items-start">
-                  <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                    {project.title}
-                  </h3>
-                  <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400">{project.date}</span>
+                {/* Project Screenshot Display */}
+                {project.image_url && (
+                  <div className="relative w-full h-48 rounded-xl overflow-hidden bg-zinc-200 dark:bg-zinc-800">
+                    <Image
+                      src={project.image_url}
+                      alt={project.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                )}
+
+                <div className="space-y-2">
+                  <div className="flex justify-between items-start">
+                    <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                      {project.title}
+                    </h3>
+                  </div>
+
+                  <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                    {project.description}
+                  </p>
                 </div>
 
-                <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                  {project.description}
-                </p>
-
-                <div className="flex items-center justify-between pt-2">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 border-t border-zinc-200/50 dark:border-zinc-800/50">
                   <div className="flex flex-wrap gap-1.5">
-                    {project.tags.map((tag) => (
-                      <span 
-                        key={tag} 
+                    {project.tags?.map((tag) => (
+                      <span
+                        key={tag}
                         className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-zinc-200/70 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 border border-zinc-300/50 dark:border-zinc-700/50"
                       >
                         #{tag}
@@ -172,15 +203,37 @@ export default function HomePage() {
                     ))}
                   </div>
 
-                  <Link
-                    href={`/projects/${project.slug}`}
-                    className="text-xs font-medium text-blue-600 dark:text-blue-400 inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
-                  >
-                    Read Case Study <ArrowUpRight className="w-3.5 h-3.5" />
-                  </Link>
+                  <div className="flex items-center gap-3">
+                    {project.github_url && (
+                      <a
+                        href={project.github_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 inline-flex items-center gap-1 transition-colors"
+                      >
+                        <GitBranch className="w-3.5 h-3.5" /> Code
+                      </a>
+                    )}
+                    {project.live_url && (
+                      <a
+                        href={project.live_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs font-medium text-blue-600 dark:text-blue-400 inline-flex items-center gap-1 hover:underline"
+                      >
+                        Live Demo <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}
+
+            {featuredProjects.length === 0 && (
+              <p className="text-sm text-zinc-500 font-mono py-4 text-center">
+                No projects found. Add one from the admin panel!
+              </p>
+            )}
           </div>
         </section>
       </FadeIn>

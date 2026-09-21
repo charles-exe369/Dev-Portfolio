@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import FadeIn from '@/components/FadeIn';
 import { supabase } from '@/lib/supabase';
-import { ExternalLink, Sparkles, FolderGit2 } from 'lucide-react';
+import { ExternalLink, GitBranch, Sparkles, FolderGit2 } from 'lucide-react';
 
 export const revalidate = 0; // Ensures fresh data is fetched on load
 
@@ -98,17 +98,16 @@ export default async function ProjectsPage() {
                     </div>
 
                     <div className="flex items-center justify-between pt-2 border-t border-zinc-200/60 dark:border-zinc-800/60 text-xs">
-                      {project.github_url && (
-                        <a
-                          href={project.github_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors font-mono"
-                        >
-                          <Github className="w-4 h-4" />
-                          Code
-                        </a>
-                      )}
+                    {project.github_url && (
+                    <a
+                        href={project.github_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 inline-flex items-center gap-1 transition-colors"
+                    >
+                        <GitBranch className="w-3.5 h-3.5" /> Code
+                    </a>
+                    )}
                       {project.live_url && (
                         <a
                           href={project.live_url}

@@ -21,6 +21,9 @@ export default function Navbar() {
           <Link href="/contact" className="hover:text-zinc-900 dark:hover:text-zinc-100">
             Contact
           </Link>
+          <Link href="/admin" className="text-slate-400 hover:text-white text-sm">
+            Admin Area
+          </Link>
         </nav>
         <ThemeToggle />
       </div>
