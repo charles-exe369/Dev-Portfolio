@@ -9,9 +9,10 @@ export default function HomePage() {
 
   return (
     <main className="max-w-2xl mx-auto px-4 py-12 space-y-16">
-      {/* 1. HERO SECTION (Fades in first) */}
+      {/* HERO SECTION */}
       <FadeIn delay={0.1} direction="up">
         <section className="space-y-6">
+          {/* Profile Header Block */}
           <div className="flex items-center gap-4">
             <div className="relative">
               <Image
@@ -22,12 +23,13 @@ export default function HomePage() {
                 priority
                 className="rounded-full object-cover border-2 border-zinc-200 dark:border-zinc-800 shadow-md"
               />
+              {/* Online Status Dot */}
               <span className="absolute bottom-0 right-0 w-4 h-4 bg-emerald-500 border-2 border-white dark:border-zinc-950 rounded-full" />
             </div>
 
             <div className="space-y-1">
               <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100">
-                Charles Osi
+                Charles Patrick
               </h2>
               <p className="text-xs font-mono text-blue-600 dark:text-blue-400">
                 @charles_exe
@@ -39,23 +41,26 @@ export default function HomePage() {
             </div>
           </div>
 
+          {/* Headline */}
           <div className="space-y-2">
-            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100">
-              Full-Stack Web Developer <br />
+            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100">
+              Full-Stack Developer <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600 dark:from-blue-400 dark:to-violet-400">
                 & UI Craftsman
               </span>
             </h1>
           </div>
 
+          {/* Bio */}
           <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed">
-            Crafting high-performance web applications with <span className="font-semibold text-zinc-900 dark:text-zinc-100">Next.js</span>, <span className="font-semibold text-zinc-900 dark:text-zinc-100">TypeScript</span>, and <span className="font-semibold text-zinc-900 dark:text-zinc-100">Tailwind CSS</span>.
+            Crafting high-performance web applications with <span className="font-semibold text-zinc-900 dark:text-zinc-100">Next.js</span>, <span className="font-semibold text-zinc-900 dark:text-zinc-100">TypeScript</span>, and <span className="font-semibold text-zinc-900 dark:text-zinc-100">Tailwind CSS</span>. Focused on clean architecture, smooth UI animations, and full-stack integration.
           </p>
 
+          {/* Action Bar */}
           <div className="flex flex-wrap items-center gap-3 pt-2">
             <Link
               href="/projects"
-              className="px-5 py-2.5 bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:hover:bg-zinc-200 text-white dark:text-zinc-900 font-medium text-sm rounded-xl transition-all shadow-md flex items-center gap-2"
+              className="px-5 py-2.5 bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:hover:bg-zinc-200 text-white dark:text-zinc-900 font-medium text-sm rounded-xl transition-all shadow-md hover:shadow-lg flex items-center gap-2"
             >
               Explore Projects <ArrowUpRight className="w-4 h-4" />
             </Link>
@@ -69,7 +74,7 @@ export default function HomePage() {
         </section>
       </FadeIn>
 
-      {/* 2. TECH STACK (Fades in slightly later) */}
+      {/* TECH STACK GRID */}
       <FadeIn delay={0.2} direction="up">
         <section className="space-y-6 pt-6 border-t border-zinc-200 dark:border-zinc-800/80">
           <div className="flex items-center gap-2 text-zinc-900 dark:text-zinc-100">
@@ -123,7 +128,7 @@ export default function HomePage() {
         </section>
       </FadeIn>
 
-      {/* 3. FEATURED PROJECTS (Fades in last) */}
+      {/* FEATURED PROJECTS */}
       <FadeIn delay={0.3} direction="up">
         <section className="space-y-6 pt-6 border-t border-zinc-200 dark:border-zinc-800/80">
           <div className="flex justify-between items-center">
@@ -142,23 +147,26 @@ export default function HomePage() {
             {projects.map((project) => (
               <div
                 key={project.slug}
-                className="group p-5 rounded-2xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800/80 hover:border-blue-500/50 dark:hover:border-blue-500/50 transition-all space-y-3 shadow-sm hover:shadow-md"
+                className="group p-5 rounded-2xl bg-zinc-50/60 dark:bg-zinc-900/60 hover:bg-zinc-100/80 dark:hover:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all space-y-3 shadow-sm hover:shadow-md"
               >
                 <div className="flex justify-between items-start">
                   <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                     {project.title}
                   </h3>
-                  <span className="text-xs font-mono text-zinc-400">{project.date}</span>
+                  <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400">{project.date}</span>
                 </div>
 
-                <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
                   {project.description}
                 </p>
 
                 <div className="flex items-center justify-between pt-2">
                   <div className="flex flex-wrap gap-1.5">
                     {project.tags.map((tag) => (
-                      <span key={tag} className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
+                      <span 
+                        key={tag} 
+                        className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-zinc-200/70 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 border border-zinc-300/50 dark:border-zinc-700/50"
+                      >
                         #{tag}
                       </span>
                     ))}

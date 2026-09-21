@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main className="max-w-2xl mx-auto px-4 py-12 space-y-12">
-      {/* 1. HEADER SECTION */}
+      {/* HEADER SECTION */}
       <FadeIn delay={0.1} direction="up">
         <section className="space-y-4">
           <div className="flex items-center gap-4">
@@ -21,6 +21,7 @@ export default function AboutPage() {
               alt="Charles Osi"
               width={72}
               height={72}
+              priority
               className="rounded-full object-cover border-2 border-zinc-200 dark:border-zinc-800 shadow-sm"
             />
             <div>
@@ -39,7 +40,7 @@ export default function AboutPage() {
         </section>
       </FadeIn>
 
-      {/* 2. BACKGROUND & PHILOSOPHY */}
+      {/* BACKGROUND & PHILOSOPHY */}
       <FadeIn delay={0.2} direction="up">
         <section className="space-y-4 border-t border-zinc-200 dark:border-zinc-800/80 pt-8">
           <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
@@ -58,7 +59,7 @@ export default function AboutPage() {
         </section>
       </FadeIn>
 
-      {/* 3. DETAILED SKILLS & TOOLKIT */}
+      {/* DETAILED SKILLS & TOOLKIT */}
       <FadeIn delay={0.3} direction="up">
         <section className="space-y-6 border-t border-zinc-200 dark:border-zinc-800/80 pt-8">
           <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
@@ -67,6 +68,7 @@ export default function AboutPage() {
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Skill Group 1 */}
             <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 space-y-2">
               <div className="flex items-center gap-2 text-blue-600 dark:text-blue-400 font-semibold text-sm">
                 <Code2 className="w-4 h-4" />
@@ -80,6 +82,7 @@ export default function AboutPage() {
               </ul>
             </div>
 
+            {/* Skill Group 2 */}
             <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 space-y-2">
               <div className="flex items-center gap-2 text-violet-600 dark:text-violet-400 font-semibold text-sm">
                 <Cpu className="w-4 h-4" />
@@ -93,6 +96,7 @@ export default function AboutPage() {
               </ul>
             </div>
 
+            {/* Skill Group 3 */}
             <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 space-y-2">
               <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-semibold text-sm">
                 <Wrench className="w-4 h-4" />
@@ -106,6 +110,7 @@ export default function AboutPage() {
               </ul>
             </div>
 
+            {/* Skill Group 4 */}
             <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 space-y-2">
               <div className="flex items-center gap-2 text-amber-600 dark:text-amber-400 font-semibold text-sm">
                 <Laptop className="w-4 h-4" />
@@ -122,7 +127,7 @@ export default function AboutPage() {
         </section>
       </FadeIn>
 
-      {/* 4. CALL TO ACTION */}
+      {/* CALL TO ACTION */}
       <FadeIn delay={0.4} direction="up">
         <section className="p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
