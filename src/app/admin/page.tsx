@@ -5,6 +5,7 @@ import { supabase } from '@/lib/supabase';
 import AdminGuard from '@/components/AdminGuard';
 import Link from 'next/link';
 
+
 interface Project {
   id: string;
   title: string;

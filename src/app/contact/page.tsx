@@ -1,6 +1,13 @@
 import Link from 'next/link';
 import FadeIn from '@/components/FadeIn';
 import { Mail, ArrowUpRight, MessageSquare, Send } from 'lucide-react';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Contact',
+  description: 'Get in touch with Charles Patrick (@charles_exe).',
+};
+
 
 function GithubIcon({ className = "w-4 h-4" }: { className?: string }) {
   return (
