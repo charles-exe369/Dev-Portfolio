@@ -4,6 +4,9 @@ import { supabase } from '@/lib/supabase';
 import FadeIn from '@/components/FadeIn';
 import { ArrowUpRight, Code2, Database, Wrench, Sparkles, Terminal, ExternalLink, GitBranch } from 'lucide-react';
 
+// FORCE DYNAMIC REVALIDATION FOR REAL-TIME DATABASE SYNC
+export const revalidate = 0;
+
 interface Project {
   id: string;
   title: string;
@@ -17,11 +20,15 @@ interface Project {
 
 export default async function HomePage() {
   // Fetch top 3 latest projects directly from Supabase
-  const { data: projects } = await supabase
+  const { data: projects, error } = await supabase
     .from('projects')
     .select('*')
     .order('created_at', { ascending: false })
     .limit(3);
+
+  if (error) {
+    console.error('Error fetching featured projects:', error.message);
+  }
 
   const featuredProjects: Project[] = projects || [];
 
