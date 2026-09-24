@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     // suppressHydrationWarning prevents warnings when next-themes modifies the <html> class
     <html lang="en" suppressHydrationWarning>
-      <body className="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen transition-colors duration-200">
+      <body className="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen flex flex-col antialiased overflow-x-hidden">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
           {children}
