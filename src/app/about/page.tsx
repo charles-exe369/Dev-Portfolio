@@ -29,7 +29,7 @@ export default function AboutPage() {
                 About Me
               </h1>
               <p className="text-sm font-mono text-blue-600 dark:text-blue-400">
-                Charles Osi · @charles_exe
+                Charles Patrick · @charles_exe
               </p>
             </div>
           </div>
