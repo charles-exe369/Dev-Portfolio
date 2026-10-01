@@ -34,7 +34,7 @@ export default async function ProjectsPage() {
   }
 
   return (
-    <main className="max-w-4xl mx-auto px-4 py-12 space-y-12">
+    <main className="max-w-6xl mx-auto px-4 py-12 space-y-12">
       <FadeIn delay={0.1} direction="up">
         <section className="space-y-3">
           <div className="flex items-center gap-2 text-blue-600 dark:text-blue-400 font-mono text-xs font-semibold">

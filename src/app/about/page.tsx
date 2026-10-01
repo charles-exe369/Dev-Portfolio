@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main className="max-w-2xl mx-auto px-4 py-12 space-y-12">
+    <main className="max-w-6xl mx-auto px-4 py-12 space-y-12">
       {/* HEADER SECTION */}
       <FadeIn delay={0.1} direction="up">
         <section className="space-y-4">

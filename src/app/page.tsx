@@ -33,7 +33,7 @@ export default async function HomePage() {
   const featuredProjects: Project[] = projects || [];
 
   return (
-    <main className="mx-auto px-4 py-12 space-y-16">
+    <main className="max-w-6xl mx-auto px-4 py-12 space-y-16">
       {/* HERO SECTION */}
       <FadeIn delay={0.1} direction="up">
         <section className="space-y-6">
