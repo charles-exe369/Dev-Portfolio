@@ -66,7 +66,7 @@ export default async function HomePage() {
             </div>
           </div>
 
-          {/* Headline */}
+          {/* Headlines */}
           <div className="space-y-2">
             <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100">
               Full-Stack Developer <br />
