@@ -153,7 +153,7 @@ export default async function HomePage() {
         </section>
       </FadeIn>
 
-      {/* FEATURED PROJECTS (SUPABASE DRIVEN) */}
+      {/* FEATURED PROJECT (SUPABASE DRIVEN) */}
       <FadeIn delay={0.3} direction="up">
         <section className="space-y-6 pt-6 border-t border-zinc-200 dark:border-zinc-800/80">
           <div className="flex justify-between items-center">
